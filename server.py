@@ -202,6 +202,14 @@ async def delete_email(email_id: int):
     
     return {"message": "Email deleted"}
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # In production, specify your frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 if __name__ == "__main__":
     import uvicorn
     
