@@ -122,7 +122,7 @@ class MailTrapHandler:
 
 
 class MailTrap:
-    def __init__(self, host='127.0.0.1', port=1024, 
+    def __init__(self, host='127.0.0.1', port=1025,
                  storage_dir='./mail_storage'):
         self.host = host
         self.port = port
@@ -169,7 +169,8 @@ app.add_middleware(
 @app.get("/api/emails")
 async def get_emails():
     handler = MailTrapHandler()
-    return handler.emails
+    sorted_emails = sorted(handler.emails, key=lambda email: email['id'], reverse=True)
+    return sorted_emails
 
 
 @app.get("/api/emails/{email_id}")
